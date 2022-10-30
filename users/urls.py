@@ -1,5 +1,8 @@
 from django.urls import path
+from rest_framework import routers
+
 from users.views import *
+
 
 urlpatterns = [
     path('', UserListView.as_view()),
