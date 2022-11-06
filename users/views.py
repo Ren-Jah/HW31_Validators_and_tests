@@ -48,7 +48,7 @@ class UserDetailView(DetailView):
     def get(self, request, *args, **kwargs):
         user = self.get_object()
         return JsonResponse({'id': user.pk,
-                            'first_name': user.first_name,
+                             'first_name': user.first_name,
                              'last_name': user.last_name,
                              'username': user.username,
                              'role': user.role,
@@ -57,36 +57,6 @@ class UserDetailView(DetailView):
                              'total_ads': user.ads.filter(is_published=True).count()
                              }, safe=False)
 
-
-# @method_decorator(csrf_exempt, name='dispatch')
-# class UserCreateView(CreateView):
-#     model = User
-#     fields = ['username']
-#
-#     def post(self, request, *args, **kwargs):
-#         data = json.loads(request.body)
-#         user = User.objects.create(
-#             first_name=data['first_name'],
-#             last_name=data['last_name'],
-#             username=data['username'],
-#             age=data['age'],
-#             role=data['role'],
-#         )
-#
-#         if 'locations' in data:
-#             for loc_name in data['locations']:
-#                 loc, _ = Location.objects.get_or_create(name=loc_name)
-#                 user.location.add(loc)
-#
-#         return JsonResponse({'id': user.pk,
-#                              'first_name': user.first_name,
-#                              'last_name': user.last_name,
-#                              'username': user.username,
-#                              'role': user.role,
-#                              'age': user.age,
-#                              'locations': list(map(str, user.location.all())),
-#                              'total_ads': user.ads.filter(is_published=True).count()
-#                              }, safe=False)
 
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
@@ -99,7 +69,7 @@ class UserDetailView(DetailView):
     def get(self, request, *args, **kwargs):
         user = self.get_object()
         return JsonResponse({'id': user.pk,
-                            'first_name': user.first_name,
+                             'first_name': user.first_name,
                              'last_name': user.last_name,
                              'username': user.username,
                              'role': user.role,
@@ -134,7 +104,7 @@ class UserUpdateView(UpdateView):
         self.object.save()
 
         return JsonResponse({'id': self.object.pk,
-                            'first_name': self.object.first_name,
+                             'first_name': self.object.first_name,
                              'last_name': self.object.last_name,
                              'username': self.object.username,
                              'role': self.object.role,
@@ -154,8 +124,6 @@ class UserDeleteView(DeleteView):
         return JsonResponse({"status": "ok"}, status=204)
 
 
-
 class LocationViewSet(ModelViewSet):
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
-

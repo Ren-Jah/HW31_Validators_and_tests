@@ -3,6 +3,23 @@ from rest_framework import serializers
 from users.models import User, Location
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    total_ads = serializers.SerializerMethodField
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
+    def get_total_ads(self, user):
+        return user.ad_set.filter(is_published=True).count()
+
+
 class UserCreateSerializer(serializers.ModelSerializer):
     location = serializers.SlugRelatedField(required=False, queryset=Location.objects.all(), many=True, slug_field="name")
 
@@ -15,6 +32,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         for loc_name in self._locations:
             location, _ = Location.objects.get_or_create(name=loc_name)
             user.location.add(location)
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
     class Meta:
@@ -26,4 +45,6 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location
         fields = "__all__"
+
+
 
