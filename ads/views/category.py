@@ -18,15 +18,10 @@ class CategoriesListView(ListView):
     def get(self, request, *args, **kwargs):
         super().get(request, *args, **kwargs)
         self.object_list = self.object_list.order_by('name')
-        paginator = Paginator(self.object_list, TOTAL_ON_PAGE)
-        page = request.GET.get('page')
-        obj = paginator.get_page(page)
         response = {}
-        category_list = [{'id': cat.pk, 'name': cat.name} for cat in obj]
+        category_list = [{'id': cat.pk, 'name': cat.name, 'slug': cat.slug} for cat in obj]
 
         response['items'] = category_list
-        response['total'] = self.object_list.count()
-        response['num_pages'] = paginator.num_pages
 
         return JsonResponse(response, safe=False)
 
@@ -44,6 +39,7 @@ class CategoriesCreateView(CreateView):
 
         return JsonResponse({'id': cat.pk,
                              'name': cat.name,
+                             'slug': cat.slug,
                              }, safe=False)
 
 

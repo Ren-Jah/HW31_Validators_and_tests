@@ -35,7 +35,7 @@ def convert_file(csv_file, json_file, model):
         jf.write(json.dumps(result, ensure_ascii=False))
 
 
-convert_file(f"{ADS}.csv", f"{ADS}.json", 'ads.ad')
-convert_file(f"{CATEGORY}.csv", f"{CATEGORY}.json", 'ads.category')
+convert_file(f"{ADS}.csv", f"{ADS}.json", 'ad.ad')
+convert_file(f"{CATEGORY}.csv", f"{CATEGORY}.json", 'ad.category')
 convert_file(f"{LOCATION}.csv", f"{LOCATION}.json", 'users.location')
 convert_file(f"{USER}.csv", f"{USER}.json", 'users.user')

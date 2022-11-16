@@ -11,18 +11,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('ads', '0001_initial'),
+        ('ad', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='ad',
             name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ads', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='ad', to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
         ),
         migrations.AddField(
             model_name='ad',
             name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ads.category'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ad.category'),
         ),
     ]
