@@ -6,9 +6,10 @@ def test_ad_create(client, user, category, access_token):
     data = {
         "author": user.pk,
         "category": category.pk,
-        "name": "Test name Ad",
+        "name": "Test name Ad 10 letters",
         "price": 42,
-        "description": "some test description",
+        "description": "",
+        "image": None,
         "is_published": False
 
     }
@@ -18,7 +19,7 @@ def test_ad_create(client, user, category, access_token):
         "is_published": False,
         "name": "Test name Ad",
         "price": 42,
-        "description": "some test description",
+        "description": "",
         "image": None,
         "author": 1,
         "category": 1
@@ -27,7 +28,7 @@ def test_ad_create(client, user, category, access_token):
     response = client.post(
         "/ad/",
         data,
-        content_type='application/json',
+        content_type="application/json",
         HTTP_AUTHORIZATION="Bearer" + access_token
     )
 

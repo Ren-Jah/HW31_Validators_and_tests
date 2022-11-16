@@ -7,7 +7,7 @@ from tests.factories import AdFactory
 def test_selection_create(client, user, ad, access_token):
     ads = AdFactory.create_batch(5)
     response = client.post(
-        '/selection/',
+        "/selection/",
         {"name": "test selection", "owner": user.pk, "items": [ad.pk for ad in ads]},
         HTTP_AUTHORIZATION="Bearer" + access_token
     )

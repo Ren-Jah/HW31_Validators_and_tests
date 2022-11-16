@@ -33,6 +33,9 @@ class AdViewSet(ModelViewSet):
     def get_permissions(self):
         return self.permissions.get(self.action, self.default_permission)
 
+    def get_serializer_class(self):
+        return self.serializer_classes.get(self.action, self.default_serializer)
+
     def list(self, request, *args, **kwargs):
         categories = request.GET.getlist('cat')
         if categories:

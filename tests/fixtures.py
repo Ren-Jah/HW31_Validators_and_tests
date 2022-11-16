@@ -1,6 +1,7 @@
-from datetime import datetime
+
 
 import pytest
+from datetime import date, timedelta
 
 
 @pytest.fixture
@@ -8,7 +9,7 @@ import pytest
 def access_token(client, django_user_model):
     username = 'testuser'
     password = 'testpassword'
-    birth_date = datetime.date.today() - datetime.timedelta(days=5000)
+    birth_date = date.today() - timedelta(days=5000)
     django_user_model.objects.create_user(
         username=username,
         password=password,
@@ -17,7 +18,7 @@ def access_token(client, django_user_model):
     )
 
     response = client.post(
-        "/users/token/",
+        "/user/token/",
         {"username": username, "password": password},
         content_type='application/json'
     )
