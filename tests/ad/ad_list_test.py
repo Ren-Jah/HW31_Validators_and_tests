@@ -8,10 +8,10 @@ from tests.factories import AdFactory
 def test_ads_list(client, access_token):
     ads = AdFactory.create_batch(5)
 
-    response = client.get("/ad/", HTTP_AUTHORIZATION="Bearer" + access_token)
+    response = client.get("/ad/", HTTP_AUTHORIZATION="Bearer " + access_token)
     assert response.status_code == 200
     assert response.data == {
-        "count":5,
+        "count": 5,
         "next": None,
         "previous": None,
         "results": AdSerializer(ads, many=True).data}

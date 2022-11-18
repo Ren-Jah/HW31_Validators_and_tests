@@ -17,7 +17,7 @@ def test_ad_create(client, user, category, access_token):
     expected_data = {
         "id": 1,
         "is_published": False,
-        "name": "Test name Ad",
+        "name": "Test name Ad 10 letters",
         "price": 42,
         "description": "",
         "image": None,
@@ -29,8 +29,7 @@ def test_ad_create(client, user, category, access_token):
         "/ad/",
         data,
         content_type="application/json",
-        HTTP_AUTHORIZATION="Bearer" + access_token
-    )
+        HTTP_AUTHORIZATION="Bearer " + access_token)
 
     assert response.status_code == 201
     assert response.data == expected_data
